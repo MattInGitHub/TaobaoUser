@@ -12,5 +12,5 @@ def get_urls():
         urls = re.findall(pattern, content)
         return urls
 
-    except Exception, e:
-        print u'获取链接失败', e.message
+    except Exception as e:
+        print (u'获取链接失败', e)
