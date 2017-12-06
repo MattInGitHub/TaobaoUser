@@ -79,15 +79,15 @@ def get_more_link():
     print (u'正在采集下一页的宝贝链接')
     driver = config.DRIVER
     try:
-        js = "window.scrollTo(0,document.body.scrollHeight)"
+        js = "window.scrollTo(0,document.body.scrollHeight-1500)"
         driver.execute_script(js)
     except WebDriverException:
         print (u'页面下拉失败')
     try:
         next = driver.find_element_by_css_selector('#content b.ui-page-num > a.ui-page-next')
         next.click()
-    except NoSuchElementException:
-        print (u'找到了翻页按钮')
+    except Exception as e:
+        print (u'找到了翻页按钮',e)
     driver.implicitly_wait(5)
     try:
         WebDriverWait(driver, config.TIMEOUT).until(
@@ -111,7 +111,7 @@ def find_urls():
         parse_html(html)
         for i in range(1, config.PAGE + 1):
             print (u'当前第',(i-1), u'页')
-            # get_more_link()
+            get_more_link()
     except Exception:
         print (u'网络错误，请重试')
 

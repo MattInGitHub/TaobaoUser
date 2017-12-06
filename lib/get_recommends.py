@@ -91,9 +91,11 @@ def deal_recommends_infos(url):
     for info in infos:
         url = info.get('url')
         comments_info = info.get('comments_info')
-        for comment_info in comments_info:
-            comment_content = comment_info[0]
-            comment_user = comment_info[1]
-            print ('comment_user', comment_user)
-            if len(comments_info) > 0 and not repeat_excel(comment_user):
-                write_info((comment_user, comment_content, url))
+        # for comment_info in comments_info:
+        #     comment_content = comment_info[0]
+        #     comment_user = comment_info[1]
+        #     print ('comment_user', comment_user)
+        #     if len(comments_info) > 0 and not repeat_excel(comment_user):
+        #         write_info((comment_user, comment_content, url))
+        print(url)
+        write_info((url[-1], url[-3], url))
