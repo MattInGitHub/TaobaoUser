@@ -52,6 +52,7 @@ def get_results(keyword):
 
 def parse_html(html):
     doc = pq(html)
+    print(doc)
     products = doc('#J_ItemList .product').items()
     for product in products:
         shop = product.find('.productShop-name').text()
@@ -79,15 +80,15 @@ def get_more_link():
     print (u'正在采集下一页的宝贝链接')
     driver = config.DRIVER
     try:
-        js = "window.scrollTo(0,document.body.scrollHeight-1500)"
+        js = "window.scrollTo(0,document.body.scrollHeight)"
         driver.execute_script(js)
     except WebDriverException:
         print (u'页面下拉失败')
     try:
         next = driver.find_element_by_css_selector('#content b.ui-page-num > a.ui-page-next')
         next.click()
-    except Exception as e:
-        print (u'找到了翻页按钮',e)
+    except Exception:
+        print (u'找到了翻页按钮')
     driver.implicitly_wait(5)
     try:
         WebDriverWait(driver, config.TIMEOUT).until(
